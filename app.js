@@ -30,6 +30,7 @@ const authenticationRouter = require("./routes/auth");
 const signupRouter = require("./routes/signup");
 const postRouter = require("./routes/posts");
 const indexRouter = require("./routes/index");
+const userRouter = require("./routes/users");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -42,7 +43,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(
-  // @ts-ignore
   session({
     secret: crypto.randomBytes(32).toString("hex"),
     resave: false,
@@ -64,6 +64,7 @@ app.use(passport.session());
 
 app.use("/auth", authenticationRouter);
 app.use("/signup", signupRouter);
+app.use("/user", isAuthenticated(), userRouter);
 app.use("/posts", isAuthenticated(), postRouter);
 app.use("/", isAuthenticated(), indexRouter);
 

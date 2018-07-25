@@ -91,3 +91,23 @@ body {
   border: none !important;
   background: transparent;
 }
+
+.profile-pic {
+  margin-top: -120px;
+  width: 150px;
+  margin-left: 50px;
+  height: 150px;
+  border: 3px solid white;
+}
+
+.user-name {
+  color: #fff;
+  text-rendering: optimizelegibility;
+  text-shadow: 0 0 3px rgba(0,0,0,.8);
+  margin-top: -70px;
+  margin-left: 20px;
+}
+
+.fa-white {
+  color : lightslategrey !important;
+}
