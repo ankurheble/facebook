@@ -34,7 +34,7 @@
     event.preventDefault();
 
     const postContent = $(this).closest(".card-footer").closest(".card").find("textarea").val();
-    alert(postContent);
+    $(this).closest(".card-footer").closest(".card").find("textarea").val('');
     $.ajax({
       url: "/posts",
       type: "POST",
