@@ -29,7 +29,7 @@ block content
                 a.no-anchor-color.fa.fa-share-square.m-auto(href="#") Share
               hr
               div.comments
-                ul.list-group
+                ul.list-group(data-id=post.id)
                   each comment in post.comments
                     li.list-group-item.no-border
                       div.flex
@@ -41,7 +41,8 @@ block content
                             a.text-sm.no-underline.like-btn(href="#",data-id=comment.id,data-resource-type="comment") Like
                             p.text-sm.ml-2.text-muted= comment.createdAt
             .card-footer.bg-transparent
-                form(method="POST" action="/posts/" + post.id + "/comments")
+                form.comment-form(method="POST" data-id=post.id)
                   div.flex.align-center
                     img.comment-pic.img-circle.mr-2(src="https://picsum.photos/30/30")
-                    input.form-control.comment-box(type="text" placeholder="Write a comment..." name="comment" style="height:30px")        
+                    input(type="hidden" value=post.id)
+                    input.form-control.comment-box(type="text" placeholder="Write a comment..." name="comment" style="height:30px" auto-complete="off")        

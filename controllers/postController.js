@@ -4,14 +4,13 @@ const Post = require("../models/Post");
 module.exports = {
   create: function(req, res) {
     const post = req.body.post;
-    console.log(post);
     Post.create(
       {
         content: post,
         user: req.user.id
       },
       function(err, post) {
-        res.json({ post: post });
+        res.json({ post: post, user: req.user });
       }
     );
   },
@@ -20,12 +19,16 @@ module.exports = {
     Comment.create(
       { content: req.body.comment, post: id, user: req.user.id },
       function(err, comment) {
-        console.log(id);
         Post.findById(id, function(err, post) {
-          post.comments.push(comment);
+          if(post.comments){
+            post.comments.push(comment);
+          }else{
+            post.comments = [];
+            post.comments.push(comment);
+          }
           post.save();
+          res.json({post: post,comment: comment, user: req.user});
         });
-        res.redirect("/");
       }
     );
   },

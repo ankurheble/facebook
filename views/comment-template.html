@@ -1,1 +1,14 @@
-<li class="list-group-item no-border"><div class="flex"><img class="comment-pic img-circle" src="https://picsum.photos/30/30" /><div class="flex column ml-2"><p class="mb-0 ml-2 comment-content">comment.content</p><div class="ml-2 flex"><span class="text-warning mr-2 text-sm" id=`likes-${comment.id}`>#{comment.likes} Likes</span><a class="text-sm no-underline like-btn" href="#" data-id=comment.id data-resource-type="comment">Like</a><p class="text-sm ml-2 text-muted">comment.createdAt</p></div></div></div></li>
+<li class="list-group-item no-border">
+    <div class="flex">
+        <img class="comment-pic img-circle" src="https://picsum.photos/30/30" />
+        <div class="flex column ml-2">
+            <p class="mb-0 ml-2 comment-content">${response.comment.content}</p>
+            <div class="ml-2 flex">
+                <span class="text-warning mr-2 text-sm" id=likes-${comment.id}>${response.comment.likes} Likes</span>
+                <a class="text-sm no-underline like-btn" href="#" data-id=${response.comment._id}
+                    data-resource-type="comment">Like</a>
+                <p class="text-sm ml-2 text-muted">${response.comment.createdAt}</p>
+            </div>
+        </div>
+    </div>
+</li>

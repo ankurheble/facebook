@@ -16,7 +16,6 @@ router.get("/", function(req, res, next) {
       if (err) {
         return res.render("error", { error: err });
       }
-      console.log(req.user);
       res.render("wall", {
         posts: posts,
         user: req.user
