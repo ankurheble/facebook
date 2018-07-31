@@ -41,6 +41,10 @@
   align-items: end;
 }
 
+.align-flex-end {
+  align-items: flex-end;
+}
+
 .column {
   flex-direction: column;
 }
@@ -68,6 +72,7 @@
   border-radius: 1rem;
   background: #eff1f3 !important;
   padding: 8px 10px;
+  height: 30px;
 }
 
 body {
@@ -110,4 +115,8 @@ body {
 
 .fa-white {
   color : lightslategrey !important;
+}
+
+.text-md {
+  font-size: 18px !important;
 }

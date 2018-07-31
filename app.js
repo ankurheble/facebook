@@ -10,6 +10,7 @@ const cookieParser = require("cookie-parser");
 const passport = require("./config/passport");
 const isAuthenticated = require("./middleware/isAuthenticated");
 const MongoDBStore = require("connect-mongo")(session);
+const moment = require("moment");
 
 const { HOST = "localhost", PORT = 27017 } = process.env;
 const ONE_WEEK = 60 * 24 * 7 * 60 * 1000;
@@ -67,6 +68,8 @@ app.use("/signup", signupRouter);
 app.use("/user", isAuthenticated(), userRouter);
 app.use("/posts", isAuthenticated(), postRouter);
 app.use("/", isAuthenticated(), indexRouter);
+
+app.locals.moment = moment;
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
