@@ -1,0 +1,27 @@
+extends navigation
+
+block content
+	.container
+		.card
+			.card-header
+				img.img-fluid.flex(src="https://picsum.photos/1068/250", alt="Cover Photo")
+				.flex.align-center
+					img.profile-pic(src="https://picsum.photos/100/100" alt="Profile Pic")
+					h3.user-name=user.name
+			.card-body
+					form.flex.column.align-flex-end(method="POST",action="/user/profile")
+						input.form-control(type="text",name="name" value=user.name)
+						input.form-control(type="email",name="email" value=user.email)
+						input.form-control.mt-1.btn.btn-primary.btn-sm(type="submit" value="Update Info" style="width:100px")
+		.card.mt-4
+			.card-header
+				p.text-primary Friends
+			.card-body
+				.row
+				each friend in user.friends
+					.col
+						.card(style="width: 150px")
+							.card-body.flex.column.align-center
+								img.img-fluid.mb-2(src="https://picsum.photos/120/120", alt=friend.name)
+								p.mb-0.text-primary.text-md=friend.name
+								p.mb-0.text-sm.text-muted #{friend.friends.length} Friends
