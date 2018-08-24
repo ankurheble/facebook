@@ -28,12 +28,12 @@ router.post("/", function(req, res) {
       },
       function(error, user) {
         if (error) {
-          req.flash("error", error);
-          res.redirect("/signup");
+          // req.flash("error", error);
+          res.json({message: "Error. Please check your username or password"});
         }
 
-        req.flash("success", "You have successfully signed up! You may now login.")
-        res.redirect("/auth/login");
+        // req.flash("success", "You have successfully signed up! You may now login.")
+        res.json(req.user);
       }
     );
   }

@@ -11,6 +11,7 @@ const passport = require("./config/passport");
 const isAuthenticated = require("./middleware/isAuthenticated");
 const MongoDBStore = require("connect-mongo")(session);
 const moment = require("moment");
+const cors = require('cors');
 
 const { HOST = "localhost", PORT = 27017 } = process.env;
 const ONE_WEEK = 60 * 24 * 7 * 60 * 1000;
@@ -42,6 +43,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cors());
 
 app.use(
   session({
@@ -65,9 +67,9 @@ app.use(passport.session());
 
 app.use("/auth", authenticationRouter);
 app.use("/signup", signupRouter);
-app.use("/user", isAuthenticated(), userRouter);
-app.use("/posts", isAuthenticated(), postRouter);
-app.use("/", isAuthenticated(), indexRouter);
+app.use("/user", userRouter);
+app.use("/posts", postRouter);
+app.use("/", indexRouter);
 
 app.locals.moment = moment;
 

@@ -6,7 +6,7 @@ const Comment = require("../models/Comment");
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
-  Post.find({ user: req.user.id }, [], {
+  Post.find({}, [], {
     sort: {
       createdAt: "desc"
     }
@@ -16,7 +16,7 @@ router.get("/", function(req, res, next) {
       if (err) {
         return res.render("error", { error: err });
       }
-      res.render("wall", {
+      res.json({
         posts: posts,
         user: req.user
       });
@@ -27,8 +27,8 @@ router.post("/comments/:id/likes", function(req, res, next) {
   Comment.findById(req.params.id, function(err, comment) {
     if (err) res.render("error", { error: err });
     comment.likes++;
-    comment.save(function(err){
-      res.json({likes : comment.likes});
+    comment.save(function(err) {
+      res.json({ likes: comment.likes });
     });
   });
 });

@@ -7,30 +7,34 @@ module.exports = {
     Post.create(
       {
         content: post,
-        user: req.user.id
       },
       function(err, post) {
-        res.json({ post: post, user: req.user });
+        res.json({ post: post });
       }
     );
   },
   addComment: function(req, res) {
     const id = req.params.id;
-    Comment.create(
-      { content: req.body.comment, post: id, user: req.user.id },
-      function(err, comment) {
-        Post.findById(id, function(err, post) {
-          if(post.comments){
-            post.comments.push(comment);
-          }else{
-            post.comments = [];
-            post.comments.push(comment);
-          }
-          post.save();
-          res.json({post: post,comment: comment, user: req.user});
+    Comment.create({ content: req.body.comment, post: id }, function(
+      err,
+      comment
+    ) {
+      Post.findById(id, function(err, post) {
+        if (post.comments) {
+          post.comments.push(comment);
+        } else {
+          post.comments = [];
+          post.comments.push(comment);
+        }
+        post.save(function(err, post) {
+          Post.findById(post.id)
+            .populate("comments")
+            .exec(function(err, post) {
+              res.json({ post: post, comment: comment });
+            });
         });
-      }
-    );
+      });
+    });
   },
   likePost: function(req, res) {
     const id = req.params.id;

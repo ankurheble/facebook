@@ -7,7 +7,7 @@ router.get("/profile", function(req, res, next) {
     .populate("friends")
     .exec(function(err,user) {
       if(err) res.render("error",{error: err});
-      res.render("profile", { user: user });
+      res.json({ user: user });
     });
 });
 
