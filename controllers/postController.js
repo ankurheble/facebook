@@ -42,7 +42,7 @@ module.exports = {
       if (err) res.render("error", { error: err });
       post.likes++;
       post.save(function(err) {
-        res.json({ likes: post.likes });
+        res.json({ updatedLikes: true });
       });
     });
   }

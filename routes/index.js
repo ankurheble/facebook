@@ -28,7 +28,7 @@ router.post("/comments/:id/likes", function(req, res, next) {
     if (err) res.render("error", { error: err });
     comment.likes++;
     comment.save(function(err) {
-      res.json({ likes: comment.likes });
+      res.json({ updatedLikes: true });
     });
   });
 });
