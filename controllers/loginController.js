@@ -18,9 +18,8 @@ module.exports = {
       req.login(user, function(error) {
         if (error) {
           return next(error);
-
-          res.redirect("/");
         }
+        res.redirect("/");
       });
     })(req, res, next);
   },
